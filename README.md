@@ -270,8 +270,8 @@ An IAM group was created for this project: **mis686-final-group-AT**, with two u
      UserType
    ORDER BY
      UserCount DESC;
-
-6. **Organizers' Revenue Contribution**:
+   ```
+  6. **Organizers' Revenue Contribution**:
    - **Question**: Which organizers are responsible for the highest percentage of our revenue?
    - **Solution**: To identify which event organizers generate the most revenue and show the percentage of total revenue they contribute:
 
@@ -300,7 +300,7 @@ An IAM group was created for this project: **mis686-final-group-AT**, with two u
    ORDER BY
      TotalRevenue DESC
    LIMIT 10;
-
+```
 7. **Preferred Payment Methods**:
    - **Question**: What payment methods are most preferred by our customers?
    - **Solution**: To display the distribution of payment methods such as Credit Card, Cash, Bank Transfer, and PayPal:
