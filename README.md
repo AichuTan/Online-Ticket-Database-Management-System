@@ -1,4 +1,5 @@
-https://aichutan.github.io/Online-Ticket-Database-Management-System/index.html
+[My Dashboard](https://AichuTan.github.io/Online-Ticket-Database-Management-System/ticket_reservation_insights_dashboard.html)
+
 
 ## Online Ticket Database Management System
 This project is part of the MIS 686 class.  
