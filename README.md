@@ -174,3 +174,196 @@ An IAM group was created for this project: **mis686-final-group-AT**, with two u
      END IF;
    END; //
    DELIMITER ;
+### Part V: Analytical Questions and Dashboard
+
+#### Analytical Questions
+
+1. **Revenue Analytics**:
+   - **Question**: Which events are generating the most revenue?
+   - **Solution**: To show the events and their total revenue, and sort them in descending order to identify which events generate the most income:
+
+   ```sql
+   SELECT
+     E.EventName,
+     SUM(P.Amount) AS TotalRevenue
+   FROM
+     Payment P
+   JOIN
+     Booking B ON P.BookingID = B.BookingID
+   JOIN
+     Event E ON B.EventID = E.EventID
+   GROUP BY
+     E.EventName
+   ORDER BY
+     TotalRevenue DESC
+   LIMIT 10;
+
+2. **Monthly Revenue Trend**:
+   - **Question**: How has our monthly revenue trended over the past year?
+   - **Solution**: To display monthly revenue growth:
+
+   ```sql
+   SELECT
+     DATE_FORMAT(P.PaymentDate, '%Y-%m') AS Month,
+     SUM(P.Amount) AS TotalRevenue
+   FROM
+     Payment P
+   GROUP BY
+     Month
+   ORDER BY
+     Month;
+
+
+3. **Venue Revenue Contribution**:
+   - **Question**: Which venues contribute most significantly to our overall revenue?
+   - **Solution**: To highlight venues ranked by total revenue contribution:
+
+   ```sql
+   SELECT
+     V.VenueName,
+     SUM(P.Amount) AS TotalRevenue
+   FROM
+     Payment P
+   JOIN
+     Booking B ON P.BookingID = B.BookingID
+   JOIN
+     Event E ON B.EventID = E.EventID
+   JOIN
+     EventVenue EV ON E.EventID = EV.EventID
+   JOIN
+     Venue V ON EV.VenueID = V.VenueID
+   GROUP BY
+     V.VenueName
+   ORDER BY
+     TotalRevenue DESC
+   LIMIT 10;
+
+
+4. **Customer Behavior & Sales Analysis**:
+   - **Question**: What is the distribution of ticket sales across different seat categories (VIP, Regular, Economy)?
+   - **Solution**: To show the distribution of sales among VIP, Regular, and Economy seats:
+
+   ```sql
+   SELECT
+     S.Category,
+     COUNT(BS.SeatID) AS TicketsSold
+   FROM
+     BookingSeat BS
+   JOIN
+     Seat S ON BS.SeatID = S.SeatID
+   GROUP BY
+     S.Category
+   ORDER BY
+     TicketsSold DESC;
+
+  5. **Customer Segmentation by Type**:
+   - **Question**: How are our customers segmented by type (Individual, Corporate, Organizer)?
+   - **Solution**: To show the proportion of Individual Customers, Corporate Customers, and Organizers:
+
+   ```sql
+   SELECT
+     UserType,
+     COUNT(*) AS UserCount
+   FROM
+     User
+   GROUP BY
+     UserType
+   ORDER BY
+     UserCount DESC;
+
+6. **Organizers' Revenue Contribution**:
+   - **Question**: Which organizers are responsible for the highest percentage of our revenue?
+   - **Solution**: To identify which event organizers generate the most revenue and show the percentage of total revenue they contribute:
+
+   ```sql
+   WITH organizer_sales AS (
+     SELECT
+       O.OrganizerName,
+       SUM(P.Amount) AS TotalRevenue
+     FROM
+       Payment P
+     INNER JOIN
+       Booking B ON P.BookingID = B.BookingID
+     INNER JOIN
+       Event E ON B.EventID = E.EventID
+     INNER JOIN
+       Organizer O ON E.UserID = O.UserID
+     GROUP BY
+       O.OrganizerName
+   )
+   SELECT
+     OrganizerName,
+     TotalRevenue,
+     CAST(TotalRevenue AS FLOAT) / (SELECT SUM(TotalRevenue) FROM organizer_sales) AS RevenuePercentage
+   FROM
+     organizer_sales
+   ORDER BY
+     TotalRevenue DESC
+   LIMIT 10;
+
+7. **Preferred Payment Methods**:
+   - **Question**: What payment methods are most preferred by our customers?
+   - **Solution**: To display the distribution of payment methods such as Credit Card, Cash, Bank Transfer, and PayPal:
+
+   ```sql
+   SELECT
+     PaymentMethod,
+     COUNT(PaymentID) AS TransactionCount
+   FROM
+     Payment
+   GROUP BY
+     PaymentMethod
+   ORDER BY
+     TransactionCount DESC;
+
+8. **Discount Sources Usage**:
+   - **Question**: Which discount sources (e.g., Groupon, Company promotions) are utilized most frequently?
+   - **Solution**: To show the usage count of discounts from sources like Groupon, Company promotions, etc.:
+
+   ```sql
+   SELECT
+     d.DiscountSource,
+     COUNT(b.DiscountID) AS UsageCount,
+     SUM(b.TotalPrice) AS RevenueImpact
+   FROM
+     Booking b
+   JOIN
+     Discount d ON b.DiscountID = d.DiscountID
+   GROUP BY
+     d.DiscountSource
+   ORDER BY
+     UsageCount DESC;
+
+
+
+9. **Venue Performance**:
+   - **Question**: How effectively are our venues being utilized, and where do we see opportunities for increased capacity usage?
+   - **Solution**: To represent venue utilization rates, indicating how well venues are being utilized:
+
+   ```sql
+   SELECT
+     v.VenueName,
+     COUNT(ev.EventID) AS TotalEvents,
+     ROUND((SUM(bs.SeatCount) / (COUNT(ev.EventID) * v.Capacity)) * 100, 2) AS AvgOccupancyRate
+   FROM
+     Venue v
+   JOIN
+     EventVenue ev ON v.VenueID = ev.VenueID
+   JOIN
+     Event e ON ev.EventID = e.EventID
+   LEFT JOIN (
+     SELECT
+       b.EventID,
+       COUNT(bs.SeatID) AS SeatCount
+     FROM
+       BookingSeat bs
+     JOIN
+       Booking b ON bs.BookingID = b.BookingID
+     GROUP BY
+       b.EventID
+   ) bs ON e.EventID = bs.EventID
+   GROUP BY
+     v.VenueName, v.Capacity
+   ORDER BY
+     AvgOccupancyRate DESC;
+
