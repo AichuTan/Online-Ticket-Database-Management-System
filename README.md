@@ -77,3 +77,30 @@ The primary objective of this database is to provide online businesses with data
    -- Example of inserting dummy data for IndividualCustomer
    INSERT INTO IndividualCustomer (CustomerID, CustomerName, Email) 
    VALUES (1, 'John Doe', 'john.doe@example.com');
+
+   ### Part IV: Database Deployment
+
+#### Database Deployment:
+The physical design was implemented on AWS's RDS platform. The database name is **database-mis686-tp** with the following configurations:  
+![Deployment Screenshot](./Screenshot%201.jpeg)
+
+#### User Access Management:
+An IAM group was created for this project: **mis686-final-group-AT**, with two users:
+
+- **mis686-databaseAT-admin**: Provides access to RDS (including modification), VPC, and CloudWatch to make modifications to accessibility, configuration, and logs/alarms for database performance and alerts.
+- **mis686-database-user**: Grants read-only access to the database for users to query or view the data without permissions to modify the underlying database.
+
+- **mis686-database-user**  
+![mis686-database-user Screenshot](./Screenshot%203.jpeg)
+
+- **mis686-databaseAT-admin**  
+![mis686-databaseAT-admin Screenshot](./Screenshot%204.jpeg)
+
+#### Index, View, Trigger, Stored Procedures (SQL Statements):
+
+**Index Example**:
+- To create an index on `CustomerName` for `IndividualCustomer` for faster lookups:
+
+   ```sql
+   CREATE INDEX idx_customer_name ON IndividualCustomer(CustomerName);
+
