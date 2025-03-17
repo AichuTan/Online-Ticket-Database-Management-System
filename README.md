@@ -60,7 +60,20 @@ The primary objective of this database is to provide online businesses with data
 #### Part II: Conceptual Data Modeling and Database Design
 
 - **ERD**  
-![ERD](./Ticket%20Reservation%20System%20-%20MIS686%20Final%20Project%20(4)%207.56.16%20AM.jpeg)
+![ERD](./Ticket%20Reservation%20System%20-%20MIS686%20Final%20Project.jpeg)
 
 - **Relational Diagram**  
 ![Relational Diagram](./Relational%20Diagram-%20Ticket%20Reservation%20-%20MIS686%20Final%20Project%20(8).jpeg)
+
+### Part III: Database Implementation
+
+1. **DDL SQL Statements**:  
+   - [TicketReservationSystem.sql](./TicketReservationSystem.sql)
+
+2. **Dummy Data Generation**:  
+   Data was generated using ChatGPT and supplemented with fake data in Google Sheets. The data was then saved as a CSV file and imported into MySQL. Below is a portion of how the dummy data was inserted. For the complete file, please refer to [TicketReservationData.sql](./TicketReservationData.sql).
+
+   ```sql
+   -- Example of inserting dummy data for IndividualCustomer
+   INSERT INTO IndividualCustomer (CustomerID, CustomerName, Email) 
+   VALUES (1, 'John Doe', 'john.doe@example.com');
