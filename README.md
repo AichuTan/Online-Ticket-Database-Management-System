@@ -1,4 +1,3 @@
-[My Dashboard](https://AichuTan.github.io/Online-Ticket-Database-Management-System/ticket_reservation_insights_dashboard.html)
 
 
 ## Online Ticket Database Management System
@@ -369,4 +368,7 @@ An IAM group was created for this project: **mis686-final-group-AT**, with two u
      v.VenueName, v.Capacity
    ORDER BY
      AvgOccupancyRate DESC;
+
+
+[Dashboard](https://AichuTan.github.io/Online-Ticket-Database-Management-System/ticket_reservation_insights_dashboard.html)
 
