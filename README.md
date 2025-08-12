@@ -1,5 +1,3 @@
-https://AichuTan.github.io/Online-Ticket-Database-Management-System/ticket_reservation_insights_dashboard.html
-
 
 ## Online Ticket Database Management System
 This project is part of the MIS 686 class.  
@@ -9,6 +7,12 @@ The term project consists of five main steps:
 3. Database Implementation
 4. Deploying the Database
 5. Developing Analytical Questions and Creating a Dashboard
+
+##  Live Project
+
+Explore the live deployment of the project, including dashboard visualizations and project documentation:
+
+▶ **[Live Site: Online Ticket Database Management System](https://aichutan.github.io/Online-Ticket-Database-Management-System/)**
 
 ### Table of Contents
 #### Part I: Topic Selection
@@ -63,10 +67,10 @@ The primary objective of this database is to provide online businesses with data
 #### Part II: Conceptual Data Modeling and Database Design
 
 - **ERD**  
-![ERD](./Ticket%20Reservation%20System%20-%20MIS686%20Final%20Project.jpeg)
+![ERD](./erd.jpeg)
 
 - **Relational Diagram**  
-![Relational Diagram](./Relational%20Diagram-%20Ticket%20Reservation%20-%20MIS686%20Final%20Project%20(8).jpeg)
+![Relational Diagram](./relational_diagram.jpeg)
 
 ### Part III: Database Implementation
 
