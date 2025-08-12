@@ -83,34 +83,33 @@
       For analytics and business intelligence, a Python-based interactive dashboard was created using the Datapane library within a Jupyter Notebook environment.
     </p>
 
-    <h3>Step-by-Step Process</h3>
-    <ol>
-      <li>
-        <strong>Topic Selection:</strong> Designed for an online ticket
-        reservation platform that handles multiple venues, events, customer
-        types, and payment methods.
-      </li>
-      <li>
-        <strong>Data Modeling:</strong> Created a conceptual ERD and translated
-        it into a relational schema with appropriate keys and relationships to
-        support business rules.
-      </li>
-      <li>
-        <strong>Implementation:</strong> MySQL-based DDL and DML scripts were
-        used to define the schema and populate the database with realistic
-        sample data.
-      </li>
-      <li>
-        <strong>Deployment:</strong> Database hosted using AWS RDS with two IAM
-        roles: <code>admin</code> (full access) and
-        <code>read-only</code> (query access only).
-      </li>
-      <li>
-        <strong>Analysis:</strong> Python (via Jupyter Notebook) was used to
-        analyze the data and generate key metrics and visualizations using
-        <code>pandas</code>, <code>matplotlib</code>, and <code>seaborn</code>.
-      </li>
-    </ol>
+<h3>Step-by-Step Process</h3>
+<ol>
+  <li>
+    <strong>Topic Selection:</strong> Designed for an online ticket
+    reservation platform that handles multiple venues, events, customer
+    types, discount options, and payment methods.
+  </li>
+  <li>
+    <strong>Data Modeling:</strong> Created a conceptual ERD and translated
+    it into a relational schema with appropriate keys and relationships to
+    enforce business rules and support query optimization.
+  </li>
+  <li>
+    <strong>Implementation:</strong> MySQL-based DDL and DML scripts were
+    used to define the schema and populate the database with realistic
+    sample data, generated using ChatGPT and external tools like Google Sheets.
+  </li>
+  <li>
+    <strong>Deployment:</strong> The database was deployed on AWS RDS with two IAM
+    roles: <code>mis686-databaseAT-admin</code> (full access) and
+    <code>mis686-database-user</code> (read-only access).
+  </li>
+  <li>
+    <strong>Analysis and Dashboard:</strong> SQL queries were written to answer business questions related to revenue, customer behavior, and venue performance. Python (via Jupyter Notebook) and the <code>datapane</code> library were used to generate an interactive dashboard for visualizing the insights.
+  </li>
+</ol>
+
 
     <h3>ERD & Schema</h3>
     <p>
